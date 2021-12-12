@@ -8,13 +8,14 @@
  * 
  **************************************************************************/
 const mongoose = require("mongoose");
+const crypto = require("crypto");
 const UserSchema = mongoose.Schema(
     {
         userName: String,
         firstName: String,
         lastName: String,
         contactNumber: Number,
-        emailAddress: {
+        email: {
             type: String,
             unique: true
         },
@@ -32,12 +33,12 @@ const user = mongoose.model("User", UserSchema);
 class UserModel {
     async createUser(info) {
         const tempUser = new user({
-            userName: info.userName,
+            // userName: info.userName || "",
             firstName: info.firstName,
             lastName: info.lastName,
-            contactNumber: info.contactNumber,
-            password: info.password,
-            emailAddress: info.emailAddress,
+            // contactNumber: info.contactNumber,
+            password: crypto.createHash('md5').update(info.password).digest('hex'),
+            email: info.email,
             token: "",
             OTP: null
         });
@@ -54,38 +55,72 @@ class UserModel {
     async deleteUser(info) {
         // create user database
         try {
-            return await user.deleteOne({ "emailAddress": info.emailAddress })
+            return await user.deleteOne({ "email": info.email })
         } catch (e) {
             return e;
         }
 
     }
 
-    async updateUser(info) {
-        // create user database
-        try {
-            return await user.updateOne({ "emailAddress": info.emailAddress }, {
-                userName: info.userName,
-                firstName: info.firstName,
-                lastName: info.lastName,
-                contactNumber: info.contactNumber,
-                password: info.password,
-                emailAddress: info.emailAddress
-            })
-        } catch (e) {
-            return e;
-        }
+    // async updateUser(info) {
+    //     // create user database
+    //     try {
+    //         return await user.updateOne({ "email": info.email }, {
+    //             userName: info.userName,
+    //             firstName: info.firstName,
+    //             lastName: info.lastName,
+    //             contactNumber: info.contactNumber,
+    //             password: info.password,
+    //             email: info.email
+    //         })
+    //     } catch (e) {
+    //         return e;
+    //     }
 
-    }
+    // }
 
     async getUser(info) {
         // create user database
         try {
-            return await user.findOne({ "emailAddress": info.emailAddress })
+            return await user.findOne({ "email": info.email })
         } catch (e) {
             return e;
         }
 
+    }
+    saveOTP = (data, callback) => {
+        return user.updateOne({
+            email: data.email
+        }, {
+            OTP: data.OTP
+        }, (err, data) => {
+            return err ? callback(err, null) : callback(null, data);
+        }
+        )
+    }
+
+    updateToken = (data, callback) => {
+        return user.updateOne({ email: data.email }, { token: data.token }, (err, data) => {
+            return err ? callback(err, null) : callback(null, data)
+        }
+        )
+    }
+    // Update a note identified by the userId in the request
+    updateUser = (data, callback) => {
+        return user.updateOne(
+            { email: data.email }, {
+            password: data.password
+        }
+            , (err, data) => {
+                return err ? callback(err, null) : callback(null, data);
+            }
+        )
+    };
+    //fetching data from DB
+    fetchUserData = (data, callback) => {
+        user.findOne({ email: data.email }, (err, data) => {
+            return err ? callback(err, null) : callback(null, data)
+        })
     }
 
 }

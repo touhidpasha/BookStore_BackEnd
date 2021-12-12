@@ -14,7 +14,7 @@ const ProductSchema = mongoose.Schema(
         author: String,
         title: String,
         image: String,
-        basePrice: Number,
+        price: Number,
         description: String
 
 
@@ -27,12 +27,12 @@ const ProductSchema = mongoose.Schema(
 const product = mongoose.model("Product", ProductSchema);
 class ProductModel {
     async createProduct(info) {
-        // console.log("model create prod "+JSON.stringify(info))
+        console.log("model create prod "+JSON.stringify(info))
         const tempProduct = new product({
             author: info.author,
             title: info.title,
             image: info.image,
-            basePrice: info.basePrice,
+            price: info.price,
             description: info.description
         });
 
@@ -75,7 +75,7 @@ class ProductModel {
     async getProduct(info) {
         // create product database
         try {
-            return await product.findOne({ "title": info.title })
+            return await product.find()
         } catch (e) {
             return e;
         }

@@ -6,16 +6,16 @@ const ProductModel = require("../../models/product.model")
 
 const csvToJson = require('csvtojson');
 
-const processRecipients = async () => {
-    const row = await csvToJson({
+const processRecipients =  () => {
+    const row =  csvToJson({
         trim: true
     }).fromFile('./books_data - books_data.csv');
 
     // Code executes after recipients are fully loaded.
-    row.forEach( async (info) => {
+    row.forEach(  (info) => {
         // console.log("Name is: "? + info.author + " and title is: " + info.title);
 
-        console.log( await ProductModel.createProduct({
+        console.log(  ProductModel.createProduct({
             author: info.author,
             title: info.title,
             image: info.image,

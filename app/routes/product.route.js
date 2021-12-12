@@ -13,6 +13,6 @@ route.delete('/deleteProduct',ProductController.deleteProduct)
 route.put('/updateProduct',ProductController.updateProduct)
 
 //get user details
-route.get('/getProduct',ProductController.getProduct)
+route.post('/getProduct',ProductController.getProduct)
 
 module.exports=route

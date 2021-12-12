@@ -39,7 +39,7 @@ class ProductController {
 
         try {
             const data = await ProductService.getProduct(req.body)
-            return res.status(200).send(data)
+            return res.status(200).send([... data].slice(req.body.index*12,req.body.index*12+12))//.orderBy('price','asc'))
         } catch (e) {
             return res.status(500).send({
                 message: err.message || "Some error occurred while creating the user.",

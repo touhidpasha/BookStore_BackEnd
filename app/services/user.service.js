@@ -32,5 +32,44 @@ class UserService {
             return e;
         }
     }
+    //lognin method
+    login = (data, callback) => {
+        UserModel.fetchUserData(data, (err, data) => {
+            // console.log(data);
+            return err ? callback(err, null) : callback(null, data);
+        })
+    };
+
+    //forgot password method
+    forgotPassword = (email, callback) => {
+        UserModel.fetchUserData({ "email": email }, (err, data) => {
+            return err ? callback(err, null) : callback(null, data)
+        })
+    };
+
+    //reset pswd method
+    resetPassword = (info, password, callback) => {
+        UserModel.updateUser({ "email": info.email, "password": password }, (err, data) => {
+            return err ? callback(err, null) : callback(null, data)
+        })
+
+    }
+    saveOTP = (data, callback) => {
+        UserModel.saveOTP(data, (err, data) => {
+            return err ? callback(err, null) : callback(null, data);
+        })
+    }
+
+    fetchUserData = (data, callback) => {
+        UserModel.fetchUserData(data, (err, data) => {
+            return err ? callback(err, null) : callback(null, data);
+        })
+    }
+
+    updateToken = (data, callback) => {
+        UserModel.updateToken(data, (err, data) => {
+            return err ? callback(err, null) : callback(null, data);
+        })
+    }
 }
 module.exports = new UserService();
