@@ -15,4 +15,8 @@ route.put('/updateProduct',ProductController.updateProduct)
 //get user details
 route.post('/getProduct',ProductController.getProduct)
 
+//get user details
+route.post('/getOneProduct',ProductController.getOneProduct)
+
+
 module.exports=route

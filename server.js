@@ -5,6 +5,8 @@ const cors = require('cors')
 
 const userRouter = require('./app/routes/user.route')
 const productRouter=require('./app/routes/product.route')
+const cartRouter = require('./app/routes/cart.router')
+const addressRouter = require('./app/routes/address.route')
 const staticData = require('./config/database.config.json')
 const logger = require('./config/logger.config')
 
@@ -21,6 +23,8 @@ app.use(express.urlencoded({
 app.use(express.json())
 app.use("/user", userRouter)
 app.use("/product",productRouter)
+app.use("/cart", cartRouter)
+app.use("/address",addressRouter)
 
 // Connecting to the database
 const dbConnect = async() => {

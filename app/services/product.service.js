@@ -32,5 +32,14 @@ class ProductService {
             return e;
         }
     }
+    async getOneProduct(info) {
+        try {
+            return await ProductModel.getProductById(info)
+        } catch (e) {
+            return e;
+        }
+    }
+
+    
 }
 module.exports = new ProductService();

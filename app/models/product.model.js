@@ -81,6 +81,16 @@ class ProductModel {
         }
 
     }
+    async getProductById(info) {
+        // create product database
+        try {
+            console.log("in model "+info.id);
+            return await product.findById(info.id)
+        } catch (e) {
+            return e;
+        }
+
+    }
 
 }
 module.exports = new ProductModel();
