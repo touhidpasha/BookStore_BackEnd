@@ -75,7 +75,10 @@ class ProductModel {
     async getProduct(info) {
         // create product database
         try {
-            return await product.find()
+            // return await (await product.find())
+            console.log(info.sortType);
+            return await (await product.find().sort({price:info.sortType}))
+
         } catch (e) {
             return e;
         }

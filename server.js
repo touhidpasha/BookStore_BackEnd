@@ -7,6 +7,7 @@ const userRouter = require('./app/routes/user.route')
 const productRouter=require('./app/routes/product.route')
 const cartRouter = require('./app/routes/cart.router')
 const addressRouter = require('./app/routes/address.route')
+const orderRouter = require('./app/routes/order.route')
 const staticData = require('./config/database.config.json')
 const logger = require('./config/logger.config')
 
@@ -25,6 +26,7 @@ app.use("/user", userRouter)
 app.use("/product",productRouter)
 app.use("/cart", cartRouter)
 app.use("/address",addressRouter)
+app.use("/order",orderRouter)
 
 // Connecting to the database
 const dbConnect = async() => {
