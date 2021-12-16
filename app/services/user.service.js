@@ -35,7 +35,6 @@ class UserService {
     //lognin method
     login = (data, callback) => {
         UserModel.fetchUserData(data, (err, data) => {
-            // console.log(data);
             return err ? callback(err, null) : callback(null, data);
         })
     };

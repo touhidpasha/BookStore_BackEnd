@@ -1,12 +1,10 @@
 const UserService = require('../services/user.service')
 const middlewares = require("../middlewares/user.middleware.js")
 const jwt = require("../utils/utils")
-const nodeMailer = require("../utils/nodeMailer")
 const crypto = require('crypto')
 
 class UserController {
     async createUser(req, res) {
-
         try {
             const data = await UserService.createUser(req.body)
             return res.status(200).send(data)
@@ -18,7 +16,6 @@ class UserController {
     }
 
     async deleteUser(req, res) {
-
         try {
             const data = await UserService.deleteUser(req.body)
             return res.status(200).send(data)
@@ -28,8 +25,8 @@ class UserController {
             });
         }
     }
-    async updateUser(req, res) {
 
+    async updateUser(req, res) {
         try {
             const data = await UserService.updateUser(req.body)
             return res.status(200).send(data)
@@ -51,8 +48,8 @@ class UserController {
         }
     }
 
-     //method for user-login
-     login = (req, res) => {
+    //method for user-login
+    login = (req, res) => {
         var token;
         UserService.login({ "email": req.body.email }, (err, data) => {
             if (err) {

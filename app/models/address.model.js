@@ -21,8 +21,6 @@ const AddressSchema = mongoose.Schema(
         landmark: String,
         type: String
 
-
-
     },
     {
         timestamps: true,
@@ -31,7 +29,6 @@ const AddressSchema = mongoose.Schema(
 const address = mongoose.model("Address", AddressSchema);
 class AddressModel {
     async createAddress(info) {
-        // console.log("model create prod " + JSON.stringify(info))
         const tempAddress = new address({
             email: info.email,
             name: info.name,

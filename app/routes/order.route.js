@@ -15,5 +15,4 @@ route.put('/updateOrder',OrderController.updateOrder)
 //get user details
 route.post('/getId',OrderController.getId)
 
-
 module.exports=route

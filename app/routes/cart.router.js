@@ -15,5 +15,4 @@ route.put('/updateCart',CartController.updateCart)
 //get user details
 route.post('/getCart',CartController.getCart)
 
-
 module.exports=route

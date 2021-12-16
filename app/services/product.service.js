@@ -39,7 +39,5 @@ class ProductService {
             return e;
         }
     }
-
-    
 }
 module.exports = new ProductService();

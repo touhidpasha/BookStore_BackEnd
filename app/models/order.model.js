@@ -15,9 +15,6 @@ const OrderSchema = mongoose.Schema(
         itemId: String,
         orderNumber: Number,
         numberOfCopies: Number
-
-
-
     },
     {
         timestamps: true,
@@ -26,20 +23,16 @@ const OrderSchema = mongoose.Schema(
 const order = mongoose.model("Order", OrderSchema);
 class OrderModel {
     async createOrder(info) {
-        
-        console.log("model create prod " + JSON.stringify(info))
         const temporder = new order({
             email: info.email,
             itemId: info.itemId,
             orderNumber: info.orderNumber,
             numberOfCopies: info.numberOfCopies
-
         });
 
         // create order database
         try {
             return await temporder.save();
-
         } catch (e) {
             return e;
         }
@@ -48,7 +41,6 @@ class OrderModel {
 
     async deleteorder(info) {
         // create order database
-        console.log("delete order "+JSON.stringify(info));
         try {
             return await order.findByIdAndDelete ( info._id )
         } catch (e) {
@@ -72,13 +64,10 @@ class OrderModel {
     async getOrder(info) {
         // create order database
         try {
-            console.log("info "+info.email);
             return await order.find({"email": info.email})
         } catch (e) {
             return e;
         }
-
     }
-
 }
 module.exports = new OrderModel();

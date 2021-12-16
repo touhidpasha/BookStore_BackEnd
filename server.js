@@ -35,13 +35,10 @@ const dbConnect = async() => {
             useNewUrlParser: true
         });
     } catch (err) {
-        console.log('Could not connect to the database. Exiting now...', err);
-        // logger.error("could not connect to DB");
+        logger.error("could not connect to DB");
         process.exit();
     }
-
-    console.log("Successfully connected to the database");
-    // logger.info("database connected");
+    logger.info("database connected");
 }
 
 app.listen(5000, () => {

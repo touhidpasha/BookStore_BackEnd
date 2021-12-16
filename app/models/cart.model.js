@@ -14,9 +14,6 @@ const CartSchema = mongoose.Schema(
         email: String,
         itemId: String,
         numberOfItems: Number
-
-
-
     },
     {
         timestamps: true,
@@ -25,12 +22,10 @@ const CartSchema = mongoose.Schema(
 const cart = mongoose.model("Cart", CartSchema);
 class CartModel {
     async createCart(info) {
-        // console.log("model create prod " + JSON.stringify(info))
         const tempCart = new cart({
             email: info.email,
             itemId: info.itemId,
             numberOfItems: info.numberOfItems
-
         });
 
         // create cart database
@@ -45,13 +40,11 @@ class CartModel {
 
     async deleteCart(info) {
         // create cart database
-        console.log("delete cart "+JSON.stringify(info));
         try {
             return await cart.findByIdAndDelete ( info._id )
         } catch (e) {
             return e;
         }
-
     }
 
     async updateCart(info) {
@@ -69,12 +62,10 @@ class CartModel {
     async getCart(info) {
         // create cart database
         try {
-            // console.log("info "+info.email);
             return await cart.find({"email": info.email})
         } catch (e) {
             return e;
         }
-
     }
 
 }

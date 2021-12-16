@@ -22,8 +22,6 @@ const UserSchema = mongoose.Schema(
         password: String,
         token: String,
         OTP: Number
-
-
     },
     {
         timestamps: true,
@@ -33,10 +31,8 @@ const user = mongoose.model("User", UserSchema);
 class UserModel {
     async createUser(info) {
         const tempUser = new user({
-            // userName: info.userName || "",
             firstName: info.firstName,
             lastName: info.lastName,
-            // contactNumber: info.contactNumber,
             password: crypto.createHash('md5').update(info.password).digest('hex'),
             email: info.email,
             token: "",
@@ -61,23 +57,6 @@ class UserModel {
         }
 
     }
-
-    // async updateUser(info) {
-    //     // create user database
-    //     try {
-    //         return await user.updateOne({ "email": info.email }, {
-    //             userName: info.userName,
-    //             firstName: info.firstName,
-    //             lastName: info.lastName,
-    //             contactNumber: info.contactNumber,
-    //             password: info.password,
-    //             email: info.email
-    //         })
-    //     } catch (e) {
-    //         return e;
-    //     }
-
-    // }
 
     async getUser(info) {
         // create user database

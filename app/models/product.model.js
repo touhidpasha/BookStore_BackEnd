@@ -16,9 +16,6 @@ const ProductSchema = mongoose.Schema(
         image: String,
         price: Number,
         description: String
-
-
-
     },
     {
         timestamps: true,
@@ -27,7 +24,6 @@ const ProductSchema = mongoose.Schema(
 const product = mongoose.model("Product", ProductSchema);
 class ProductModel {
     async createProduct(info) {
-        console.log("model create prod "+JSON.stringify(info))
         const tempProduct = new product({
             author: info.author,
             title: info.title,
@@ -75,8 +71,6 @@ class ProductModel {
     async getProduct(info) {
         // create product database
         try {
-            // return await (await product.find())
-            console.log(info.sortType);
             return await (await product.find().sort({price:info.sortType}))
 
         } catch (e) {
@@ -87,13 +81,11 @@ class ProductModel {
     async getProductById(info) {
         // create product database
         try {
-            console.log("in model "+info.id);
             return await product.findById(info.id)
         } catch (e) {
             return e;
         }
 
     }
-
 }
 module.exports = new ProductModel();

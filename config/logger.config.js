@@ -1,6 +1,5 @@
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, prettyPrint, json } = format;
-
 let errorLogFileName = new Date().toLocaleDateString() + '_error.log';
 let combinedLogFileName = new Date().toLocaleDateString() + '_combined.log';
 
